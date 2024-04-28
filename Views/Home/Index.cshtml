@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Reports";
+    var customer = ViewBag.cus;
+    //Layout = null;
+}
+
+<h2 class="text-center">Star Lounge Reports</h2>
+
+
+<form action="Index">
+    <select name="locationid" class="btn btn-secondary" id="location">
+        <option value="Location">Location</option>
+        @*
+        <option value="001">Cashier</option>*@
+        <option value="002">Teasty Food</option>
+        <option value="003">Paul</option>
+        <option value="004">Bella Verona</option>
+        <option value="005">Vaishnavi</option>
+        <option value="006">Almaas</option>
+        <option value="007">Soft Drink</option>
+        <option value="012">Ape Rasa</option>
+        <option value="011">Fresh Juice</option>
+        <option value="010">Japanes</option>
+        <option value="013">Greate View</option>
+        <option value="009">Red and Wight</option>
+        <option value="007">MFY</option>
+        <option value="014">Koththu Factory</option>
+
+    </select>
+    <input name="salesdate" id="salesdate" type="date">
+    <input type="submit" class="btn btn-secondary" value="Submit">
+</form>
+
+<br>
+@{
+    string today = DateTime.Now.ToString();
+    <b>@today</b>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>SALSE DATE</th>
+        <th>LOCATION ID</th>
+        <th>TRAN AMOUNT</th>
+    </tr>
+
+    @{
+
+        double totalamount = 0;
+        double totalcommision = 0;
+        double Aftercomm = 0;
+
+        foreach (var item in customer)
+        {
+            totalamount = totalamount + item.Tran_Amount;
+            totalcommision = totalcommision + item.Tran_Amount * 35 / 100;
+            Aftercomm = Aftercomm + item.Tran_Amount - item.Tran_Amount * 35 / 100;
+            <tr>
+                <td>@item.Sales_Date</td>
+                <td><b>@item.Location_Id</b></td>
+                <td class="fw-bold" align="right">@item.Tran_Amount.ToString("n1")</td>
+            </tr>
+
+            <tr>
+                @{
+                    double Amu = item.Tran_Amount * 35 / 100;
+                }
+                <td></td>
+                <td>Commision</td>
+                <td class="fw-bold" align="right">@Amu.ToString("n1")</td>
+            </tr>
+            <tr>
+                @{
+                    double sum = (item.Tran_Amount - @Amu);
+                }
+                <td></td>
+                <td>Total Amount</td>
+                <td class="fw-bold" align="right">@sum.ToString("n1") </td>
+
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        }
+        <table class="table table-bordered">
+            <tr>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td><b>Total Sales</b></td>
+                <td><b>@totalamount.ToString("n1")</b></td>
+            </tr>
+            <tr>
+                <td><b>Total Commision</b></td>
+                <td><b>@totalcommision.ToString("n1")</b></td>
+            </tr>
+            <tr>
+                <td><b>Total Amount</b></td>
+                <td><b>@Aftercomm.ToString("n1")</b></td>
+            </tr>
+        </table>
+    }
+</table>
+
+    
+    
+    <input type="button" value="Print Form" onclick="window.print()" />

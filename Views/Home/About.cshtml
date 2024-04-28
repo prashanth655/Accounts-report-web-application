@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "TRANSACTIONS";
+    var customer = ViewBag.cus;
+    //Layout = null;
+}
+
+
+
+<main aria-labelledby="title">
+    <h2 class="text-center">Transactions Details</h2>
+    
+</main>
+
+<form action="About">
+    <!--<select name="locationid" class="btn btn-secondary" id="location">
+        <option value="Location">Location</option>-->
+        @*<option value="001">Cashier</option>*@
+        <!--<option value="002">Teasty Food</option>
+        <option value="003">Paul</option>
+        <option value="004">Bella Verona</option>
+        <option value="005">Vaishnavi</option>
+        <option value="006">Almaas</option>
+        <option value="007">Soft Drink</option>
+        <option value="012">Ape Rasa</option>
+        <option value="011">Fresh Juice</option>
+        <option value="010">Japanes</option>
+        <option value="013">Greate View</option>
+        <option value="009">Red and Wight</option>
+        <option value="007">MFY</option>
+        <option value="014">Koththu Factory</option>
+
+    </select>-->
+    <input name="salesdate" id="salesdate" type="date">
+
+    <label for="fname">Card Number:</label>
+    <input type="text" id="cardn" name="cardno"><br><br>
+
+    <input type="submit" class="btn btn-secondary" value="Submit">
+</form>
+
+<br>
+@{
+    string today = DateTime.Now.ToString(); <h5>Tran Description</h5>
+    <b>@today</b> 
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>CARD NO</th>
+        <th>TRAN DATE</th>
+        <th>SALES TIME</th>
+        <th>TRAN AMOUNT</th>
+        <th>LOCATION ID</th>
+        <th>LOCATION NAME</th>
+        <th>TRAN DESCRIPTION</th> 
+    </tr> 
+
+    
+    @{
+
+
+        foreach (var item in customer)
+        {
+        <tr>
+            <td>@item.Card_No</td>
+            <td>@item.Tran_Date</td>
+            <td>@item.Sales_Time</td>
+            <td>@item.Tran_Amount</td>
+            <td>@item.Location_Id</td>
+            <td>@item.Location_Name</td>
+            <td>@item.Tran_Type</td>
+
+        </tr>
+
+        }
+    }
+</table>
